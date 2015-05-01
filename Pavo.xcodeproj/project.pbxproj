@@ -12,6 +12,7 @@
 		83D400191AF297EB00D63886 /* PavoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D400181AF297EB00D63886 /* PavoTests.swift */; };
 		83D400251AF403E200D63886 /* ImageBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D400241AF403E200D63886 /* ImageBuffer.swift */; };
 		83D400291AF404CA00D63886 /* DisplayMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D400281AF404CA00D63886 /* DisplayMonitor.swift */; };
+		83D4002B1AF406F600D63886 /* ImageHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D4002A1AF406F600D63886 /* ImageHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +34,7 @@
 		83D400181AF297EB00D63886 /* PavoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PavoTests.swift; sourceTree = "<group>"; };
 		83D400241AF403E200D63886 /* ImageBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBuffer.swift; sourceTree = "<group>"; };
 		83D400281AF404CA00D63886 /* DisplayMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayMonitor.swift; sourceTree = "<group>"; };
+		83D4002A1AF406F600D63886 /* ImageHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				83D4000B1AF297EA00D63886 /* Pavo.h */,
 				83D400241AF403E200D63886 /* ImageBuffer.swift */,
 				83D400281AF404CA00D63886 /* DisplayMonitor.swift */,
+				83D4002A1AF406F600D63886 /* ImageHelpers.swift */,
 				83D400091AF297EA00D63886 /* Supporting Files */,
 			);
 			path = Pavo;
@@ -217,6 +220,7 @@
 			files = (
 				83D400251AF403E200D63886 /* ImageBuffer.swift in Sources */,
 				83D400291AF404CA00D63886 /* DisplayMonitor.swift in Sources */,
+				83D4002B1AF406F600D63886 /* ImageHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
