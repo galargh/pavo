@@ -10,6 +10,8 @@
 		83D4000C1AF297EA00D63886 /* Pavo.h in Headers */ = {isa = PBXBuildFile; fileRef = 83D4000B1AF297EA00D63886 /* Pavo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		83D400121AF297EB00D63886 /* Pavo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83D400061AF297EA00D63886 /* Pavo.framework */; };
 		83D400191AF297EB00D63886 /* PavoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D400181AF297EB00D63886 /* PavoTests.swift */; };
+		83D400251AF403E200D63886 /* ImageBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D400241AF403E200D63886 /* ImageBuffer.swift */; };
+		83D400291AF404CA00D63886 /* DisplayMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D400281AF404CA00D63886 /* DisplayMonitor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +31,8 @@
 		83D400111AF297EB00D63886 /* PavoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PavoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		83D400171AF297EB00D63886 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		83D400181AF297EB00D63886 /* PavoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PavoTests.swift; sourceTree = "<group>"; };
+		83D400241AF403E200D63886 /* ImageBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBuffer.swift; sourceTree = "<group>"; };
+		83D400281AF404CA00D63886 /* DisplayMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayMonitor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 			isa = PBXGroup;
 			children = (
 				83D4000B1AF297EA00D63886 /* Pavo.h */,
+				83D400241AF403E200D63886 /* ImageBuffer.swift */,
+				83D400281AF404CA00D63886 /* DisplayMonitor.swift */,
 				83D400091AF297EA00D63886 /* Supporting Files */,
 			);
 			path = Pavo;
@@ -209,6 +215,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83D400251AF403E200D63886 /* ImageBuffer.swift in Sources */,
+				83D400291AF404CA00D63886 /* DisplayMonitor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,6 +326,7 @@
 		83D4001D1AF297EB00D63886 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -329,12 +338,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		83D4001E1AF297EB00D63886 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -400,6 +411,7 @@
 				83D4001E1AF297EB00D63886 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		83D4001F1AF297EB00D63886 /* Build configuration list for PBXNativeTarget "PavoTests" */ = {
 			isa = XCConfigurationList;
@@ -408,6 +420,7 @@
 				83D400211AF297EB00D63886 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

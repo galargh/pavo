@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <ImageIO/ImageIO.h>
 
 //! Project version number for Pavo.
 FOUNDATION_EXPORT double PavoVersionNumber;
