@@ -30,6 +30,10 @@ struct ImageBuffer {
         current = (current + 1) % capacity
     }
 
+    mutating func clear() {
+        images.removeAll(keepCapacity: true)
+    }
+
     func toArray() -> [CGImage] {
         var prefix = images[current..<images.count]
         var sufix = images[0..<current]

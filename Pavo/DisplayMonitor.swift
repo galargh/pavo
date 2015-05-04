@@ -25,12 +25,13 @@ public class DisplayMonitor {
     }
 
     public func start() -> Bool {
-        if timer != nil {
-            return false
+        if timer == nil {
+            timer = NSTimer.scheduledTimerWithTimeInterval(interval,
+                target: self, selector: Selector("capture"), userInfo: nil,
+                repeats: true)
+            return true
         }
-        timer = NSTimer.scheduledTimerWithTimeInterval(interval, target: self,
-            selector: Selector("capture"), userInfo: nil, repeats: true)
-        return true
+        return false
     }
 
     public func stop() -> Bool {
@@ -40,6 +41,12 @@ public class DisplayMonitor {
             return true
         }
         return false
+    }
+
+    public func clearCaptured() {
+        sync {
+            self.buffer.clear()
+        }
     }
 
     public func takeCaptured() -> [CGImage]? {
