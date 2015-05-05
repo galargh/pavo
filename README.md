@@ -64,4 +64,5 @@ monitor.clearCaptured()
 ```
 
 ### TODO:
+* saving CGImages as MP4, WebM
 * examples, how it works
