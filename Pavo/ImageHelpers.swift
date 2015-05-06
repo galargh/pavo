@@ -17,8 +17,8 @@ public extension CGImage {
             .allZeros)
         let destination = CGImageDestinationCreateWithURL(url, kUTTypePNG, 1,
             nil)
-        CGImageDestinationAddImage(destination!, self, nil)
-        CGImageDestinationFinalize(destination!)
+        CGImageDestinationAddImage(destination, self, nil)
+        CGImageDestinationFinalize(destination)
     }
 
 }
@@ -28,11 +28,9 @@ extension Array {
     func saveAsPNG<T: CGImage>(to dir: String, with name: String) {
         var count = 0
         for t in self {
-            autoreleasepool {
-                let image = t as! CGImage
-                image.saveAsPNG(to: dir, with: "\(name)\(count)")
-                count++
-            }
+            let image = t as! CGImage
+            image.saveAsPNG(to: dir, with: "\(name)\(count)")
+            count++
         }
     }
 

@@ -49,12 +49,12 @@ public class DisplayMonitor {
         }
     }
 
-    public func takeCaptured() -> [CGImage]? {
-        var copy: ImageBuffer?
+    public func takeCaptured() -> [CGImage] {
+        var captured: ImageBuffer?
         sync {
-            copy = self.buffer
+            captured = self.buffer
         }
-        return copy?.toArray()
+        return captured!.toArray()
     }
 
     public func takeScreenShot() -> CGImage {
