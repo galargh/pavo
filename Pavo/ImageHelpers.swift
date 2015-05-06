@@ -23,7 +23,7 @@ public extension CGImage {
         CGImageDestinationFinalize(destination)
     }
 
-    public func toCVPixelBuffer() -> CVPixelBuffer {
+    func toCVPixelBuffer() -> CVPixelBuffer {
         var settings = [
             kCVPixelBufferCGImageCompatibilityKey as String: true,
             kCVPixelBufferCGBitmapContextCompatibilityKey as String: true
@@ -82,6 +82,7 @@ extension Array {
                     AVVideoMaxKeyFrameIntervalKey: 1
                 ]
             ]
+
             let input = AVAssetWriterInput(mediaType: AVMediaTypeVideo,
                 outputSettings: settings)
             let adaptor = AVAssetWriterInputPixelBufferAdaptor(
@@ -107,20 +108,21 @@ extension Array {
             for t in self {
                 let buffer = (t as! CGImage).toCVPixelBuffer()
                 let time = getTime()
-                ExponentialBackoff(isReady, 0.1, 2.0, {
+                ExponentialBackoff(isReady, 0.1, 2.0) {
                     adaptor.appendPixelBuffer(buffer, withPresentationTime: time)
-                })
+                }
                 count++
             }
+
             input.markAsFinished()
             video.endSessionAtSourceTime(getTime())
-            video.finishWritingWithCompletionHandler({println("DONE")})
+            video.finishWritingWithCompletionHandler(nil)
     }
 
 }
 
 // ADD: maximum number of backoffs, error closure
-public func ExponentialBackoff(condition: () -> Bool, base: NSTimeInterval,
+func ExponentialBackoff(condition: () -> Bool, base: NSTimeInterval,
     multiplier: NSTimeInterval, closure: () -> ()) {
         var backoff = base
         while !condition() {
