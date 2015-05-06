@@ -65,18 +65,18 @@ monitor.clearCaptured()
 
 To save CGImage as a PNG:
 ```swift
-screenShot.saveAsPNG(to: "\Users\gfjalar\ScreenShots\", with: "display")
+screenShot.saveAsPNG(to: "/Users/gfjalar/ScreenShots/", with: "display")
 ```
 
 To save array of CGImages as PNGs:
 ```swift
 // Index will be appended to the name of each frame
-SaveAsPNG(frames, to: "\Users\gfjalar\ScreenShots\series\", with: "shot")
+SaveAsPNG(frames, to: "/Users/gfjalar/ScreenShots/series/", with: "shot")
 ```
 
 To save array of CGImages as MPEG4:
 ```swift
-SaveAsMPEG4(frames, to: "\Users\gfjalar\Films\", with: "film", and: 25)
+SaveAsMPEG4(frames, to: "/Users/gfjalar/Films/", with: "film", and: 25)
 ```
 
 ### TODO:
