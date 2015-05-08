@@ -23,26 +23,28 @@ public extension CGImage {
         CGImageDestinationFinalize(destination)
     }
 
-    func toCVPixelBuffer() -> CVPixelBuffer {
-        var settings = [
-            kCVPixelBufferCGImageCompatibilityKey as String: true,
-            kCVPixelBufferCGBitmapContextCompatibilityKey as String: true
-        ]
+    func toCVPixelBuffer(width: Int, _ height: Int,
+        _ pixelFormat: OSType) -> CVPixelBuffer {
 
-        var baseAddress = CFDataGetBytePtr(
-            CGDataProviderCopyData(CGImageGetDataProvider(self))
-        )
+            var settings = [
+                kCVPixelBufferCGImageCompatibilityKey as String: true,
+                kCVPixelBufferCGBitmapContextCompatibilityKey as String: true
+            ]
 
-        var buffer : Unmanaged<CVPixelBuffer>?
+            var baseAddress = UnsafeMutablePointer<Void>(CFDataGetBytePtr(
+                CGDataProviderCopyData(CGImageGetDataProvider(self)))
+            )
 
-        var status = CVPixelBufferCreateWithBytes( kCFAllocatorDefault,
-            CGImageGetWidth(self), CGImageGetHeight(self),
-            OSType(kCVPixelFormatType_32ARGB),
-            UnsafeMutablePointer<Void>(baseAddress),
-            CGImageGetBytesPerRow(self), nil, nil, settings, &buffer
-        )
+            var bytesPerRow = CGImageGetBytesPerRow(self)
 
-        return buffer!.takeRetainedValue()
+            var buffer : Unmanaged<CVPixelBuffer>?
+
+            var status = CVPixelBufferCreateWithBytes(kCFAllocatorDefault,
+                width, height, pixelFormat, baseAddress, bytesPerRow, nil,
+                nil, settings, &buffer
+            )
+
+            return buffer!.takeRetainedValue()
     }
 
 }
@@ -61,15 +63,20 @@ extension Array {
 
     // ADD: async execution, completed callback
     func saveAsMPEG4<T: CGImage>(to dir: String, with name: String,
-        and fps: Int) {
+        _ fps: Int, _ pixelFormat: Int = kCVPixelFormatType_32BGRA) {
+
+            if self.count == 0 {
+                return
+            }
+
             let url = NSURL(fileURLWithPath: "\(dir)\(name).mp4")
             let video = AVAssetWriter(URL: url, fileType: AVFileTypeMPEG4,
                 error: nil)
 
-            // NOT HANDLED: self.count == 0
             let first = self.first! as! CGImage
             let width = CGImageGetWidth(first)
             let height = CGImageGetHeight(first)
+            let osPixelFormat = OSType(pixelFormat)
 
             let settings = [
                 AVVideoCodecKey: AVVideoCodecH264,
@@ -106,17 +113,19 @@ extension Array {
             }
 
             for t in self {
-                let buffer = (t as! CGImage).toCVPixelBuffer()
+                let buffer = (t as! CGImage).toCVPixelBuffer(width, height,
+                    osPixelFormat)
                 let time = getTime()
                 ExponentialBackoff(isReady, 0.1, 2.0) {
-                    adaptor.appendPixelBuffer(buffer, withPresentationTime: time)
+                    adaptor.appendPixelBuffer(buffer,
+                        withPresentationTime: time)
                 }
                 count++
             }
 
             input.markAsFinished()
             video.endSessionAtSourceTime(getTime())
-            video.finishWritingWithCompletionHandler(nil)
+            video.finishWritingWithCompletionHandler({})
     }
 
 }
@@ -134,8 +143,8 @@ func ExponentialBackoff(condition: () -> Bool, base: NSTimeInterval,
 }
 
 public func SaveAsMPEG4(images: [CGImage], to dir: String, with name: String,
-    and fps: Int) {
-        images.saveAsMPEG4(to: dir, with: name, and: fps)
+    fps: Int, _ pixelFormat: Int = kCVPixelFormatType_32BGRA) {
+        images.saveAsMPEG4(to: dir, with: name, fps, pixelFormat)
 }
 
 public func SaveAsPNG(images: [CGImage], to dir: String, with name: String) {
