@@ -68,7 +68,7 @@ To save CGImage as a PNG:
 screenShot.saveAsPNG(to: "/Users/gfjalar/ScreenShots/", with: "display")
 ```
 
-To save array of CGImages as PNGs:
+To save array of CGImages as a series of PNGs:
 ```swift
 // Index will be appended to the name of each frame
 SaveAsPNG(frames, to: "/Users/gfjalar/ScreenShots/series/", with: "shot")
@@ -76,12 +76,13 @@ SaveAsPNG(frames, to: "/Users/gfjalar/ScreenShots/series/", with: "shot")
 
 To save array of CGImages as MPEG4:
 ```swift
-SaveAsMPEG4(frames, to: "/Users/gfjalar/Films/", with: "film", and: 25)
+SaveAsMPEG4(frames, to: "/Users/gfjalar/Films/", with: "film", 25,
+	kCVPixelFormatType_32BGRA)
 ```
 
 ### TODO:
 * debugging and testing
 * memory management
 * error handlilng on save
-* video file already exists handling
+* existing video file handling
 * examples, how it works
