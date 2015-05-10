@@ -62,8 +62,8 @@ extension Array {
     }
 
     // ADD: async execution, completed callback
-    func saveAsMPEG4<T: CGImage>(to dir: String, with name: String,
-        _ fps: Int, _ pixelFormat: Int = kCVPixelFormatType_32BGRA) {
+    func saveAsMPEG4<T: CGImage>(to dir: String, with name: String, _ fps: Int,
+        _ pixelFormat: Int, _ bitRate: Int, _ profileLevel: String) {
 
             if self.count == 0 {
                 return
@@ -83,9 +83,8 @@ extension Array {
                 AVVideoWidthKey: width,
                 AVVideoHeightKey: height,
                 AVVideoCompressionPropertiesKey: [
-                    AVVideoAverageBitRateKey: 20000*1000,
-                    AVVideoProfileLevelKey:
-                        AVVideoProfileLevelH264HighAutoLevel,
+                    AVVideoAverageBitRateKey: bitRate,
+                    AVVideoProfileLevelKey: profileLevel,
                     AVVideoMaxKeyFrameIntervalKey: 1
                 ]
             ]
@@ -130,6 +129,15 @@ extension Array {
 
 }
 
+extension Dictionary {
+    func get(key: Key, or defaultValue: Value) -> Value {
+        if let value = self[key] {
+            return value
+        }
+        return defaultValue
+    }
+}
+
 // ADD: maximum number of backoffs, error closure
 func ExponentialBackoff(condition: () -> Bool, base: NSTimeInterval,
     multiplier: NSTimeInterval, closure: () -> ()) {
@@ -143,8 +151,10 @@ func ExponentialBackoff(condition: () -> Bool, base: NSTimeInterval,
 }
 
 public func SaveAsMPEG4(images: [CGImage], to dir: String, with name: String,
-    fps: Int, _ pixelFormat: Int = kCVPixelFormatType_32BGRA) {
-        images.saveAsMPEG4(to: dir, with: name, fps, pixelFormat)
+    fps: Int, _ pixelFormat: Int = kCVPixelFormatType_32BGRA, _ bitRate: Int =
+    20000*1000, _ profileLevel: String = AVVideoProfileLevelH264HighAutoLevel) {
+        images.saveAsMPEG4(to: dir, with: name, fps, pixelFormat, bitRate,
+            profileLevel)
 }
 
 public func SaveAsPNG(images: [CGImage], to dir: String, with name: String) {

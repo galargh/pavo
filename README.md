@@ -77,7 +77,7 @@ SaveAsPNG(frames, to: "/Users/gfjalar/ScreenShots/series/", with: "shot")
 To save array of CGImages as MPEG4:
 ```swift
 SaveAsMPEG4(frames, to: "/Users/gfjalar/Films/", with: "film", 25,
-	kCVPixelFormatType_32BGRA)
+	kCVPixelFormatType_32BGRA, 20000*1000, AVVideoProfileLevelH264HighAutoLevel)
 ```
 
 ### TODO:
