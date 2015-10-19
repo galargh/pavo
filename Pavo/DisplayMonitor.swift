@@ -58,7 +58,8 @@ public class DisplayMonitor {
     }
 
     public func takeScreenShot() -> CGImage {
-        return CGDisplayCreateImage(display).takeRetainedValue()
+        // TODO: Error handling
+        return CGDisplayCreateImage(display)!
     }
 
     @objc func capture() {

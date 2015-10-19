@@ -36,7 +36,7 @@ struct ImageBuffer {
 
     func toArray() -> [CGImage] {
         var slice = images[current..<images.count]
-        slice.extend(images[0..<current])
+        slice.appendContentsOf(images[0..<current])
         return Array(slice)
     }
 
